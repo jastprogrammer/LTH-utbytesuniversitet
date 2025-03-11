@@ -23,7 +23,6 @@ for uni in df_LTH['University']:
 
 Merge = pd.DataFrame({'University':names, 'Rank': order})
 Merge_sorted = Merge.sort_values(by="Rank", ascending=True)
-Merge_sorted = Merge_sorted.set_index('Rank')
 Merge_sorted.to_csv('merge.sorted.csv', index=False)
 
 print(Merge_sorted.head(25))
