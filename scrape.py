@@ -52,3 +52,23 @@ else:
     df_THE.to_csv(csv_filename, index=False)  # Save to CSV
     driver.quit()
 
+# Setup WebDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+
+    # Load the website
+    url = "https://www.timeshighereducation.com/world-university-rankings/2025/subject-ranking/engineering#!/length/-1/sort_by/rank/sort_order/asc/cols/scores"
+    driver.get(url)
+
+    # Wait for JavaScript content to load
+    time.sleep(5)  # Increase if needed
+
+    # Extract university names
+    unis = driver.find_elements(By.CLASS_NAME, "ranking-institution-title")
+    uni_names = [uni.text for uni in unis]
+
+    # Store data in Pandas DataFrame
+    df_THE_ENG = pd.DataFrame({"University": uni_names})
+    df_THE_ENG.to_csv('THE_ENG_rankings.csv', index=False)  # Save to CSV
+    driver.quit()
+
